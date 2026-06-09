@@ -12,9 +12,9 @@ Este repositorio contiene la API REST y la lógica de negocio de **Aunary**, una
 ## 📖 Documentación del Sistema
 Toda la planeación de software y especificaciones de diseño se encuentran centralizadas en este repositorio bajo la carpeta `/docs`:
 
-1.  [Requisitos del Sistema (SRS)](docs/01_REQUIREMENTS.md.md)
-2.  [Diseño de Base de Datos (ERD)](docs/02_DATABASE_DESIGN.md.md)
-3.  [Especificación del Stack Tecnológico](docs/03_TECH_STACK.md.md)
+1.  [Requisitos del Sistema (SRS)](docs/01_REQUIREMENTS.md)
+2.  [Diseño de Base de Datos (ERD)](docs/02_DATABASE_DESIGN.md)
+3.  [Especificación del Stack Tecnológico](docs/03_TECH_STACK.md)
 
 ## 🚫 Contribuciones y Reporte de Issues
 Este es un proyecto de carácter estrictamente **personal** y **comercial**. 
