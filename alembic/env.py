@@ -42,8 +42,6 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    configuration = config.get_section(config.config_ini_section) or {}
-    configuration["sqlalchemy.url"] = settings.DATABASE_URL
 
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
@@ -69,9 +67,15 @@ async def run_async_migrations() -> None:
     and associate a connection with the context.
 
     """
+    # 1. Obtenemos la configuración del archivo ini
+    configuration = config.get_section(config.config_ini_section) or {}
 
+    # 2. ¡AQUÍ ESTÁ LA MAGIA! Sobrescribimos la URL falsa por la tuya dinámica
+    configuration["sqlalchemy.url"] = settings.DATABASE_URL
+
+    # 3. Pasamos la configuración corregida al motor
     connectable = async_engine_from_config(
-        config.get_section(config.config_ini_section, {}),
+        configuration,
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
