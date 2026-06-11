@@ -1,4 +1,6 @@
 from uuid import UUID
+
+from src.modules.users.models import User
 from .repository import UserRepository
 
 class UserService:
@@ -15,3 +17,6 @@ class UserService:
             raise ValueError("User not found")
         
         return user
+    
+    async def create_user(self, user: User):
+        return await self.user_repository.create_user(user)
