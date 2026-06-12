@@ -10,7 +10,5 @@ router = APIRouter(prefix="/users", tags=["Users"])
 async def get_all_users(user_service: UserService = Depends(get_user_service)):
     return await user_service.get_all()
 
-@router.post("/create_user", status_code=status.HTTP_201_CREATED, response_model=UserPublic)
-async def create_user(user_in: UserCreate, user_service: UserService = Depends(get_user_service)):
-    return await user_service.create_user(user_in)
+
 
