@@ -7,6 +7,7 @@ from src.core.mixins import TimeStampModel
 
 class UserBase(SQLModel):
     email: str = Field(max_length=255, unique=True, nullable=False, index=True)
+    username: str = Field(max_length=100, unique=True, nullable=False, index=True)
     full_name: str = Field(max_length=100, nullable=False)
     bio: Optional[str] = None
     avatar_url: str | None = Field(max_length=511, nullable=True, default=None)
