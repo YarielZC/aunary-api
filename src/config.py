@@ -8,7 +8,11 @@ class Settings(BaseSettings):
     POSTGRES_PORT: int
     POSTGRES_DB: str
 
-    DEBUG: bool
+    DEBUG: bool = False
+
+    AUTH_DPOP_SECRET_KEY: str
+    AUTH_DPOP_ALGORITHM: str
+    AUTH_ACCESS_TOKEN_DURATION: int
 
     @property
     def DATABASE_URL(self) -> str:
