@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio.session import AsyncSession
 from sqlalchemy.ext.asyncio import AsyncScalarResult
 from sqlmodel import select
-from .models import User
+from .models import User, UserPublic
 
 class UserRepository:
     def __init__(self, session: AsyncSession) -> None:
@@ -17,6 +17,11 @@ class UserRepository:
     
     async def get_by_id(self, user_id: UUID) -> User | None:
         statement = select(User).where(User.id == user_id)
+        result: AsyncScalarResult[User] = await self.session.exec(statement)
+        return result.one_or_none()
+
+    async def get_user_by_username(self, username: str) -> User | None:
+        statement = select(User).where(User.username == username)
         result: AsyncScalarResult[User] = await self.session.exec(statement)
         return result.one_or_none()
 

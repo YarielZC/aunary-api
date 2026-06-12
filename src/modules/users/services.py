@@ -1,10 +1,9 @@
 from uuid import UUID
 
-from src.modules.users.models import UserCreate, UserPublic, User
+from src.modules.users.models import UserPublic, User
 from .repository import UserRepository
 
-from fastapi import status
-
+from fastapi import status, HTTPException
 class UserService:
     def __init__(self, user_repository: UserRepository):
         self.user_repository = user_repository
@@ -20,16 +19,12 @@ class UserService:
         
         return user
     
-    async def create_user(self, user: UserCreate) -> UserPublic:
+    async def get_user_by_username(self, username: str) -> User | None:
+        return await self.user_repository.get_user_by_username(username)
+    
+    async def create_user(self, user: User) -> UserPublic:
 
         try:
-            hashed_pw_mock = user.password + "_hashed"
-
-            user_data = user.model_dump(exclude={"password"})
-
-            user_data["hashed_password"] = hashed_pw_mock
-
-            
-            return await self.user_repository.create_user(User(**user_data))
+            return await self.user_repository.create_user(user)
         except ValueError as e:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
